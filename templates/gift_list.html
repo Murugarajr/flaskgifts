@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>{{ the_title }}</h1>
+
+<ul>
+  <li><a href="{{ url_for('new_gift') }}">New Gift</a></li>
+  <li><a href="{{ url_for('index') }}">Home page</a></li>
+</ul>
+
+<img alt="Photo: remove Gift" src="{{ url_for('static', filename='images/img1.jpg') }}"style="border: none; width: 100%;">
+
+{{ table }}
+
+{% endblock %}

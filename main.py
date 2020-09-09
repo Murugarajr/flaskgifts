@@ -3,7 +3,8 @@ from db_setup import init_db, db_session
 from forms import ProdForm
 from flask import flash, render_template, request, redirect
 from models import Album, Artist
-from tables import Results
+from tables import Results, Buy
+import json
 
 init_db()
 
@@ -17,7 +18,7 @@ def index():
 @app.route('/new_gift.html')
 def new_gift():
     """
-        Add a new album
+        Add a new product/gift
         """
     form = ProdForm(request.form)
 
@@ -33,7 +34,11 @@ def new_gift():
 
 @app.route('/gift_list.html')
 def gift_list():
-    return render_template('gift_list.html', the_title='Gift List')
+    with open('catalog.json') as json_file:
+        results = json.load(json_file)
+    table = Results(results)
+    table.border = True
+    return render_template('gift_list.html', the_title='Gift List', table=table)
 
 
 def save_changes(album, form, new=False):
@@ -61,19 +66,30 @@ def save_changes(album, form, new=False):
 
 @app.route('/rm_gift.html')
 def rm_gift():
+    """
+    remove gift items
+    :return: return gift table
+    """
     return render_template('rm_gift.html', the_title='Remove Gift')
 
 
 @app.route('/buy_gift.html')
 def buy_gift():
-    return render_template('buy_gift.html', the_title='Purchase Gift')
+    with open('catalog.json') as json_file:
+        results = json.load(json_file)
+    table = Results(results)
+    table.border = True
+    return render_template('buy_gift.html', the_title='Purchase Gift', table=table)
 
 
 @app.route('/report.html')
 def report():
-    return render_template('report.html', the_title='Report')
+    with open('catalog.json') as json_file:
+        results = json.load(json_file)
+    table = Results(results)
+    table.border = True
+    return render_template('report.html', the_title='Report', table=table)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
