@@ -16,7 +16,7 @@ gunicorn==20.0.4
 # idna==2.10=py_0
 itsdangerous==1.1.0
 Jinja2==2.11.2
-jsonify==0.5
+# jsonify==0.5
 libcxx==10.0.0=1
 libedit==3.1.20191231=h1de35cc_1
 libffi==3.3=hb1e8313_2
