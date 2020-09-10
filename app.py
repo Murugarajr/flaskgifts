@@ -7,6 +7,6 @@ import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mymusic.db'
-app.secret_key = "flask rocks!"
+app.secret_key = "flasktest1"
 
 db = SQLAlchemy(app)
